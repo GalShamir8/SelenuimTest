@@ -51,48 +51,48 @@ class SanityTest {
 
 	}
 
-//	@Test
-//	@Order(2)
-//	void test_login() {
-//
-//		logger.info("------Test login starts------");
-//		try (FileReader reader = new FileReader("certificate.json")) {
-//			JSONObject certificate_data = (JSONObject) new JSONParser().parse(reader);
-//			Map<String, String> certificate_map = (Map) certificate_data.get("certificate");
-//			String username = certificate_map.get("username");
-//			String password = certificate_map.get("password");
-//			Thread.sleep(TIME_INTERVAL);
-//
-//			WebElement myAccount = driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a/span[1]"));
-//			myAccount.click();
-//			Thread.sleep(TIME_INTERVAL);
-//
-//			WebElement loginPage = myAccount.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/ul/li[2]/a"));
-//			loginPage.click();
-//			Thread.sleep(TIME_INTERVAL);
-//
-//			WebElement emailTextInput = driver.findElement(By.id("input-email"));
-//			WebElement passwordTextInput = driver.findElement(By.id("input-password"));
-//			emailTextInput.sendKeys(username);
-//			passwordTextInput.sendKeys(password);
-//
-//			WebElement loginBottom = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input"));
-//			loginBottom.click();
-//			Thread.sleep(TIME_INTERVAL);
-//
-//			// if the user has entered incorrect certificates the element below will appear
-//			assertNull(driver.findElement(By.xpath("//*[@id=\"account-login\"]/div[1]")));
-//
-//		} catch (NoSuchElementException e) {
-//			logger.info("Test login passed");
-//		} catch (Exception e) {
-//			logger.error("Test Failed " + e.getMessage());
-//		} finally {
-//			logger.info("------Test login ends------");
-//			driver.get(url);
-//		}
-//
-//	}
+	@Test
+	@Order(2)
+	void test_login() {
+
+		logger.info("------Test login starts------");
+		try (FileReader reader = new FileReader("certificate.json")) {
+			JSONObject certificate_data = (JSONObject) new JSONParser().parse(reader);
+			Map<String, String> certificate_map = (Map) certificate_data.get("certificate");
+			String username = certificate_map.get("username");
+			String password = certificate_map.get("password");
+			Thread.sleep(TIME_INTERVAL);
+
+			WebElement myAccount = driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a/span[1]"));
+			myAccount.click();
+			Thread.sleep(TIME_INTERVAL);
+
+			WebElement loginPage = myAccount.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/ul/li[2]/a"));
+			loginPage.click();
+			Thread.sleep(TIME_INTERVAL);
+
+			WebElement emailTextInput = driver.findElement(By.id("input-email"));
+			WebElement passwordTextInput = driver.findElement(By.id("input-password"));
+			emailTextInput.sendKeys(username);
+			passwordTextInput.sendKeys(password);
+
+			WebElement loginBottom = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input"));
+			loginBottom.click();
+			Thread.sleep(TIME_INTERVAL);
+
+			// if the user has entered incorrect certificates the element below will appear
+			assertNull(driver.findElement(By.xpath("//*[@id=\"account-login\"]/div[1]")));
+
+		} catch (NoSuchElementException e) {
+			logger.info("Test login passed");
+		} catch (Exception e) {
+			logger.error("Test Failed " + e.getMessage());
+		} finally {
+			logger.info("------Test login ends------");
+			driver.get(url);
+		}
+
+	}
 	
 	@Test
 	@Order(1)
