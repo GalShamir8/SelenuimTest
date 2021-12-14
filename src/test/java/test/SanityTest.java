@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -52,7 +53,7 @@ class SanityTest {
 	}
 
 	@Test
-	@Order(2)
+	@Order(1)
 	void test_login() {
 
 		logger.info("------Test login starts------");
@@ -95,16 +96,25 @@ class SanityTest {
 	}
 	
 	@Test
-	@Order(1)
+	@Order(2)
 	void test_cart_add_product() {
 		try {
-			WebElement productsList = driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]"));
-			
-			
+			 logger.info("------Test purchase starts------");
+			 WebElement product = driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/a/img"));
+			 product.click();
+			 WebElement buttonAddToCart = driver.findElement(By.xpath("//*[@id=\"button-cart\"]"));
+			 buttonAddToCart.click();
+			 Thread.sleep(TIME_INTERVAL);
+			 WebElement buttonGoToCart = driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[4]/a"));
+			 buttonGoToCart.click();
+			 Thread.sleep(TIME_INTERVAL);
+			 WebElement purchaseButton = driver.findElement(By.xpath("//*[@id=\"content\"]/div[3]/div[2]/a"));
+			 purchaseButton.click();
+			logger.info("------Test purchase passed------");
 		}catch (Exception e) {
 			logger.error("Test Failed " + e.getMessage());
 		} finally {
-			logger.info("------Test login ends------");
+			logger.info("------Test purchase ends------");
 		}
 		
 	}
