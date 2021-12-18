@@ -72,10 +72,15 @@ class SanityTest {
 			loginPage.click();
 			Thread.sleep(TIME_INTERVAL);
 
-			WebElement emailTextInput = driver.findElement(By.id("input-email"));
-			WebElement passwordTextInput = driver.findElement(By.id("input-password"));
-			emailTextInput.sendKeys(username);
-			passwordTextInput.sendKeys(password);
+//			WebElement emailTextInput = driver.findElement(By.id("input-email"));
+//			WebElement passwordTextInput = driver.findElement(By.id("input-password"));
+//			emailTextInput.sendKeys(username);
+//			passwordTextInput.sendKeys(password);
+			/*functional approach to the problem. could be used for larger scales*/
+			certificate_map.forEach((key, value) -> {
+				driver.findElement(By.id(String.format("input-%s", key))).sendKeys(value);
+			});
+			
 
 			WebElement loginBottom = driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input"));
 			loginBottom.click();
