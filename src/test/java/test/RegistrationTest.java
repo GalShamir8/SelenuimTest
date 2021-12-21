@@ -23,7 +23,8 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.log4testng.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 @TestMethodOrder(OrderAnnotation.class)
 class RegistrationTest {
@@ -39,7 +40,7 @@ class RegistrationTest {
 		driver = new ChromeDriver();
 		driver.get(homePageURL);
 		driver.manage().window().setSize(new Dimension(1296, 696));
-		logger = Logger.getLogger(RegistrationTest.class);
+		logger = LogManager.getLogger();
 
 		/* ALL TESTS ARE BEING CONDUCTED ON REGISTRATION PAGE */
 		WebElement myAccount = driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a"));
