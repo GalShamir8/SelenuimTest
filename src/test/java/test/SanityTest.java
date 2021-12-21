@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.FileReader;
 import java.util.Map;
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,30 +27,35 @@ class SanityTest {
 	private static WebDriver driver;
 	private static Logger logger;
 	private static final long TIME_INTERVAL = 2000;
-	private static final String url = "http://tutorialsninja.com/demo";
+	private static final String homePageURL = "http://tutorialsninja.com/demo";
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		String originPath = "C:\\Users\\galsh\\Desktop\\YEAR C\\Quality Assurance\\selenuim\\chromedriver.exe";
+		String originPath = "C:/Program Files/ChromeDriver/chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", originPath);
 		driver = new ChromeDriver();
-		driver.get(url);
+		driver.get(homePageURL);
 		driver.manage().window().setSize(new Dimension(1296, 696));
 		logger = LogManager.getLogger();
+		logger.info("Sanity testset - begin");
+	}
 
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		logger.info("sanity testset - end");
+		Thread.sleep(TIME_INTERVAL);
+		driver.quit();
 	}
 
 	@Test
 	@Order(1)
 	void test_login() {
 
-		logger.info("------Test login starts------");
+		logger.info("\tlogin test - begin");
 		try (FileReader reader = new FileReader("certificate.json")) {
 			JSONObject certificate_data = (JSONObject) new JSONParser().parse(reader);
 			@SuppressWarnings("unchecked")
 			Map<String, String> certificate_map = (Map<String, String>) certificate_data.get("certificate");
-//			String username = certificate_map.get("username");
-//			String password = certificate_map.get("password");
 			Thread.sleep(TIME_INTERVAL);
 
 			WebElement myAccount = driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a/span[1]"));
@@ -61,11 +66,6 @@ class SanityTest {
 			loginPage.click();
 			Thread.sleep(TIME_INTERVAL);
 
-//			WebElement emailTextInput = driver.findElement(By.id("input-email"));
-//			WebElement passwordTextInput = driver.findElement(By.id("input-password"));
-//			emailTextInput.sendKeys(username);
-//			passwordTextInput.sendKeys(password);
-			
 			/* functional approach to the problem. could be used for larger scales */
 			certificate_map.forEach((key, value) -> {
 				driver.findElement(By.id(String.format("input-%s", key))).sendKeys(value);
@@ -79,12 +79,12 @@ class SanityTest {
 			assertNull(driver.findElement(By.xpath("//*[@id=\"account-login\"]/div[1]")));
 
 		} catch (NoSuchElementException e) {
-			logger.info("Test login passed");
+			logger.info("\t\ttest Passed");
 		} catch (Exception e) {
-			logger.error("Test Failed " + e.getMessage());
+			logger.error("\t\ttest failed " + e.getMessage());
 		} finally {
-			logger.info("------Test login ends------");
-			driver.get(url);
+			logger.info("\tlogin test - end");
+			driver.get(homePageURL);
 		}
 
 	}
@@ -93,7 +93,7 @@ class SanityTest {
 	@Order(2)
 	void test_cart_add_product() {
 		try {
-			logger.info("------Test purchase starts------");
+			logger.info("\tpurchase test - begin");
 			WebElement product = driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[1]/div/div[1]/a/img"));
 			product.click();
 			WebElement buttonAddToCart = driver.findElement(By.xpath("//*[@id=\"button-cart\"]"));
@@ -104,19 +104,13 @@ class SanityTest {
 			Thread.sleep(TIME_INTERVAL);
 			WebElement purchaseButton = driver.findElement(By.xpath("//*[@id=\"content\"]/div[3]/div[2]/a"));
 			purchaseButton.click();
-			logger.info("------Test purchase passed------");
+			logger.info("\t\ttest passed");
 		} catch (Exception e) {
-			logger.error("Test Failed " + e.getMessage());
+			logger.error("\t\ttest failed " + e.getMessage());
 		} finally {
-			logger.info("------Test purchase ends------");
+			logger.info("\tpurchase test - end");
 		}
 
-	}
-
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		Thread.sleep(TIME_INTERVAL);
-		driver.quit();
 	}
 
 }

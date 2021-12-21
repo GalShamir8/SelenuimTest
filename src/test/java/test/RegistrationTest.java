@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.jupiter.api.AfterAll;
@@ -23,8 +24,6 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 @TestMethodOrder(OrderAnnotation.class)
 class RegistrationTest {
@@ -51,10 +50,13 @@ class RegistrationTest {
 		registrationPage.click();
 		Thread.sleep(TIME_INTERVAL);
 
+		logger.info("registration testset - begin");
+
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws InterruptedException {
+		logger.info("registration testset - end");
 		Thread.sleep(TIME_INTERVAL);
 		driver.quit();
 	}
@@ -69,7 +71,7 @@ class RegistrationTest {
 	@Test
 	@Order(1)
 	void registration_edgeCaseTest() {
-		logger.info("------Test Registration Edge Case starts------");
+		logger.info("\tregistration edge case test - begin");
 		try {
 			driver.findElement(By.cssSelector("input.btn.btn-primary")).click();
 
@@ -77,19 +79,18 @@ class RegistrationTest {
 			List<WebElement> textFieldAlerts = driver.findElements(By.cssSelector(".text-danger"));
 			assertTrue(textFieldAlerts.size() > 0);
 
-		} catch (NoSuchElementException e) {
-			logger.error("Test Failed " + e.getMessage());
+			logger.info("\t\ttest passed");
 		} catch (Exception e) {
-			logger.error("Test Failed " + e.getMessage());
+			logger.error("\t\ttest failed - " + e.getMessage());
 		} finally {
-			logger.info("------Test Registration Edge Case ends------");
+			logger.info("\tregistration edge case test - end");
 		}
 	}
 
 	@Test
 	@Order(2)
 	void registration_existingUserTest() {
-		logger.info("------Test Registration With Existing User starts------");
+		logger.info("\tregistration with existing user test - begin");
 		try (FileReader reader = new FileReader("certificate.json")) {
 			JSONObject certificate_data = (JSONObject) new JSONParser().parse(reader);
 			@SuppressWarnings("unchecked")
@@ -106,12 +107,12 @@ class RegistrationTest {
 			// if the user has entered incorrect certificates the element below will appear
 			assertEquals(driver.findElement(By.cssSelector(".alert")).getText(),
 					"Warning: E-Mail Address is already registered!");
-
+			logger.info("\t\ttest Passed");
 		} catch (Exception e) {
-			logger.error("Test Failed " + e.getMessage());
+			logger.error("\t\ttest failed " + e.getMessage());
 			fail();
 		} finally {
-			logger.info("------Test Registration With Existing User ends------");
+			logger.info("\tregistration with existing user test - end");
 
 		}
 	}

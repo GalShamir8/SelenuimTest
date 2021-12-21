@@ -1,0 +1,19 @@
+[INFO ] 2021-12-22 01:33:54.600 [main] SanityTest - Sanity testset - begin
+[INFO ] 2021-12-22 01:33:54.607 [main] SanityTest - 	login test - begin
+[INFO ] 2021-12-22 01:34:03.875 [main] SanityTest - 		test Passed
+[INFO ] 2021-12-22 01:34:03.875 [main] SanityTest - 	login test - end
+[INFO ] 2021-12-22 01:34:04.249 [main] SanityTest - 	purchase test - begin
+[INFO ] 2021-12-22 01:34:10.696 [main] SanityTest - 		test passed
+[INFO ] 2021-12-22 01:34:10.696 [main] SanityTest - 	purchase test - end
+[INFO ] 2021-12-22 01:34:10.697 [main] SanityTest - sanity testset - end
+[INFO ] 2021-12-22 01:34:16.682 [main] CurrencyTest - currency test - begin
+[INFO ] 2021-12-22 01:34:18.622 [main] CurrencyTest - 	test passed
+[INFO ] 2021-12-22 01:34:18.622 [main] CurrencyTest - currency test - end
+[INFO ] 2021-12-22 01:34:29.377 [main] RegistrationTest - registration testset - begin
+[INFO ] 2021-12-22 01:34:31.394 [main] RegistrationTest - 	registration edge case test - begin
+[INFO ] 2021-12-22 01:34:31.802 [main] RegistrationTest - 		test passed
+[INFO ] 2021-12-22 01:34:31.802 [main] RegistrationTest - 	registration edge case test - end
+[INFO ] 2021-12-22 01:34:34.287 [main] RegistrationTest - 	registration with existing user test - begin
+[INFO ] 2021-12-22 01:34:36.775 [main] RegistrationTest - 		test Passed
+[INFO ] 2021-12-22 01:34:36.775 [main] RegistrationTest - 	registration with existing user test - end
+[INFO ] 2021-12-22 01:34:36.775 [main] RegistrationTest - registration testset - end
