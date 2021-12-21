@@ -1,6 +1,6 @@
 {
     "certificate" : {
-    "username": "admin@walla.com" ,
+    "email": "admin@walla.com" ,
     "password": "123456"
     }
 }
